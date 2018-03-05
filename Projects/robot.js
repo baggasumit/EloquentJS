@@ -152,3 +152,65 @@ function compareRobots(robot1, memory1, robot2, memory2) {
 }
 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
+compareRobots(randomRobot, [], goalOrientedRobot, []);
+
+// Persistent Group
+
+class PGroup {
+  create(members) {
+    this.members = members ? members.slice() : [];
+  }
+
+  see() {
+    return this.members;
+  }
+  add(value) {
+    const pgroup = new PGroup();
+    pgroup.create(this.members);
+    if (!this.has(value)) {
+      pgroup.members.push(value);
+    }
+    return pgroup;
+  }
+
+  delete(value) {
+    const pgroup = new PGroup();
+    pgroup.create(this.members);
+    const index = this.members.indexOf(value);
+    if (index >= 0) {
+      pgroup.members.splice(index, 1);
+    }
+    return pgroup;
+  }
+
+  has(value) {
+    return this.members.includes(value);
+  }
+
+  static get empty() {
+    const pgroup = new PGroup();
+    pgroup.create();
+    return pgroup;
+  }
+
+  // static from(iter) {
+  //   const group = new Group();
+  //   for (let item of iter) {
+  //     group.add(item);
+  //   }
+  //   return group;
+  // }
+}
+
+let a = PGroup.empty.add("a");
+let ab = a.add("b");
+let b = ab.delete("a");
+
+console.log(b.has("b"));
+// → true
+console.log(a.has("b"));
+// → false
+console.log(b.has("a"));
+// → false
+
+console.log({ b });
