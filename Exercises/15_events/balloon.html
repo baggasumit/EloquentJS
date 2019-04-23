@@ -1,0 +1,26 @@
+<body>
+  <p>🎈</p>
+
+  <script>
+    const balloon = document.querySelector('p');
+    balloon.style.fontSize = '1rem';
+    document.addEventListener('keydown', function resize(event) {
+      const fontSize = balloon.style.fontSize;
+      let fontSizeValue = fontSize.substr(0, fontSize.length - 3);
+
+      // resize
+      if (event.key === 'ArrowUp') {
+        fontSizeValue *= 1.1;
+      } else if (event.key === 'ArrowDown') {
+        fontSizeValue *= 0.9;
+      }
+
+      // explode if font size greater than 5rem
+      if (fontSizeValue > 5) {
+        balloon.textContent = '💥';
+        document.removeEventListener('keydown', resize);
+      }
+      balloon.style.fontSize = fontSizeValue + 'rem';
+    });
+  </script>
+</body>

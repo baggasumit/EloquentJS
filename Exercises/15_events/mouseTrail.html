@@ -1,0 +1,54 @@
+<head>
+  <style>
+    .trail {
+      /* className for the trail elements */
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: teal;
+    }
+    body {
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="trail"></div>
+  <div class="trail"></div>
+  <div class="trail"></div>
+  <script>
+    const trailElements = document.querySelectorAll('.trail');
+    window.addEventListener('mousemove', (event) => {
+      function move() {
+        let topDelta = 20;
+        for (let trailEl of trailElements) {
+          trailEl.style.top = event.pageY + topDelta;
+          trailEl.style.left = event.pageX + 5;
+          topDelta += 10;
+        }
+      }
+      requestAnimationFrame(move);
+    });
+
+    // Without requestAnimationFrame (Using debouncing)
+    /*
+      window.addEventListener('mousemove', (event) => {
+        let scheduled = null;
+        if (!scheduled) {
+          setTimeout(() => {
+            const trailElements = document.querySelectorAll('.trail');
+            let topDelta = 20;
+            for (let trailEl of trailElements) {
+              trailEl.style.top = scheduled.pageY + topDelta;
+              trailEl.style.left = scheduled.pageX + 5;
+              topDelta += 10;
+            }
+            scheduled = null;
+          }, 100);
+        }
+        scheduled = event;
+      });
+    */
+  </script>
+</body>

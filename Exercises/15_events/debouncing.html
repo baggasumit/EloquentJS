@@ -1,0 +1,28 @@
+<body>
+  <p></p>
+  <textarea placeholder="Type something here..."></textarea>
+
+  <script>
+    // Technique 1
+    let textarea = document.querySelector('textarea');
+    let timeout;
+    textarea.addEventListener('input', () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => console.log('Typed!'), 500);
+    });
+
+    // Technique 2
+    let scheduled = null;
+    window.addEventListener('mousemove', (event) => {
+      if (!scheduled) {
+        setTimeout(() => {
+          document.querySelector('p').textContent = `Mouse at ${
+            scheduled.pageX
+          }, ${scheduled.pageY}`;
+          scheduled = null;
+        }, 200);
+      }
+      scheduled = event;
+    });
+  </script>
+</body>

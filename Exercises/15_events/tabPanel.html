@@ -1,0 +1,43 @@
+<body>
+  <tab-panel>
+    <div data-tabname="a">Tab one</div>
+    <div data-tabname="b">Tab two</div>
+    <div data-tabname="c">Tab three</div>
+    <div data-tabname="dd">Tab four</div>
+    <div data-tabname="eef">Tab give</div>
+  </tab-panel>
+  <script>
+    function asTabs(node) {
+      // Your code here.
+      const children = Array.from(node.children);
+      const tabCount = node.children.length;
+      const childNodes = [];
+
+      for (let i = 0; i < tabCount; i++) {
+        children[i].style.display = 'none';
+        const button = document.createElement('button');
+        button.textContent = children[i].dataset.tabname;
+        button.addEventListener('click', revealTab.bind(null, childNodes, i));
+        childNodes.push([children[i], button]);
+      }
+      for (let i = tabCount - 1; i >= 0; i--) {
+        const [_, button] = childNodes[i];
+        node.prepend(button);
+      }
+      revealTab(childNodes, 0);
+    }
+
+    function revealTab(childNodes, childIdx) {
+      console.log('nodes', childNodes);
+      childNodes.forEach(([node, button]) => {
+        node.style.display = 'none';
+        button.style.background = '';
+      });
+      const [selectedNode, selectedButton] = childNodes[childIdx];
+      selectedButton.style.background = 'orange';
+      selectedNode.style.display = '';
+    }
+
+    asTabs(document.querySelector('tab-panel'));
+  </script>
+</body>

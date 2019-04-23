@@ -1,0 +1,30 @@
+<head>
+  <style>
+    body {
+      color: rebeccapurple;
+    }
+
+    .main {
+      width: 50vw;
+      height: 300vh;
+      background: gainsboro;
+    }
+  </style>
+</head>
+<body>
+  <div>Be what you want to be</div>
+  <p style="border: 3px solid red; padding: 4px;">
+    I'm boxed in
+  </p>
+  <div class="main"></div>
+
+  <script>
+    let para = document.body.getElementsByTagName('p')[0];
+    console.log('clientHeight:', para.clientHeight);
+    console.log('offsetHeight:', para.offsetHeight);
+    console.log('bounding client Rect:', para.getBoundingClientRect());
+    document.addEventListener('scroll', function() {
+      console.log(document.pageXOffset);
+    });
+  </script>
+</body>

@@ -1,0 +1,65 @@
+<body>
+  <h1>Mountains</h1>
+
+  <div id="mountains"></div>
+
+  <script>
+    /*
+      <table>
+        <tr>
+          <th>name</th>
+          <th>height</th>
+          <th>place</th>
+        </tr>
+        <tr>
+          <td>Kilimanjaro</td>
+          <td>5895</td>
+          <td>Tanzania</td>
+        </tr>
+      </table>
+    */
+    const MOUNTAINS = [
+      { name: 'Kilimanjaro', height: 5895, place: 'Tanzania' },
+      { name: 'Everest', height: 8848, place: 'Nepal' },
+      { name: 'Mount Fuji', height: 3776, place: 'Japan' },
+      { name: 'Vaalserberg', height: 323, place: 'Netherlands' },
+      { name: 'Denali', height: 6168, place: 'United States' },
+      { name: 'Popocatepetl', height: 5465, place: 'Mexico' },
+      { name: 'Mont Blanc', height: 4808, place: 'Italy/France' },
+    ];
+
+    // Your code here
+    const columns = Object.keys(MOUNTAINS[0]);
+
+    const table = document.createElement('table');
+    table.appendChild(createTableHeader(columns));
+    for (let mountain of MOUNTAINS) {
+      table.appendChild(createTableRow(mountain));
+    }
+
+    document.querySelector('#mountains').appendChild(table);
+
+    function createTableHeader(columns) {
+      const row = document.createElement('tr');
+      for (let col of columns) {
+        const colHeader = document.createElement('th');
+        colHeader.textContent = col;
+        row.appendChild(colHeader);
+      }
+      return row;
+    }
+
+    function createTableRow(mountain) {
+      const row = document.createElement('tr');
+      for (let key in mountain) {
+        const colItem = document.createElement('td');
+        colItem.textContent = mountain[key];
+        if (typeof mountain[key] === 'number') {
+          colItem.style.textAlign = 'right';
+        }
+        row.appendChild(colItem);
+      }
+      return row;
+    }
+  </script>
+</body>
